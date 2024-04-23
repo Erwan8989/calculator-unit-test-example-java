@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     // Exécutez SonarQube Scanner avec les paramètres nécessaires
-                    withSonarQubeEnv('SonarQube') {
+                    withSonarQubeEnv('Sonar 1') {
                         sh 'sonar-scanner'
                     }
                 }
