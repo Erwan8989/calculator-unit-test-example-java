@@ -12,5 +12,16 @@ pipeline {
                 sh 'mvn test'
             }
         }
+        stage('SonarQube analysis') {
+            steps {
+                script {
+                    // Exécute SonarQube Scanner avec les paramètres nécessaires
+                    def scannerHome = tool 'SonarQube Scanner';
+                    withSonarQubeEnv('Sonar 1') {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
+                }
+            }
+        }
     }
 }
