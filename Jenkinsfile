@@ -4,6 +4,7 @@ pipeline {
     tools {
         maven 'Maven' // Utilise la version par défaut de Maven
         jdk 'JDK' // Utilise la version par défaut de JDK
+        // Ajoutez ici la configuration de SonarQube Scanner si nécessaire
     }
 
     stages {
@@ -15,10 +16,11 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 script {
-                    // Exécute SonarQube Scanner avec les paramètres nécessaires
-                    //def scannerHome = tool 'SonarQube Scanner';
+                    // Récupérez l'emplacement de SonarQube Scanner
+                    def scannerHome = tool 'SonarQube Scanner'
+                    // Exécutez SonarQube Scanner avec l'emplacement récupéré
                     withSonarQubeEnv('Sonar 1') {
-                        sh "/opt/sonarqube"
+                        sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
