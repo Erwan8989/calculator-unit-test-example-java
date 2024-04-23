@@ -16,9 +16,11 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 script {
-                    // Exécutez SonarQube Scanner avec les paramètres nécessaires
+                    // Récupérez l'emplacement de SonarQube Scanner
+                    def scannerHome = tool 'Sonar 1'
+                    // Exécutez SonarQube Scanner avec l'emplacement récupéré
                     withSonarQubeEnv('Sonar 1') {
-                        sh 'sonar-scanner'
+                        sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
