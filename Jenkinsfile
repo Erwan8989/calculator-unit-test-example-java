@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     // Récupérez l'emplacement de SonarQube Scanner
-                    def scannerHome = tool 'SonarQube Scanner'
+                    def scannerHome = tool 'Sonar 1'
                     // Exécutez SonarQube Scanner avec l'emplacement récupéré
                     withSonarQubeEnv('Sonar 1') {
                         sh "${scannerHome}/bin/sonar-scanner"
