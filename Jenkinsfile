@@ -20,7 +20,7 @@ pipeline {
                     def scannerHome = tool 'Sonar 1'
                     // Exécutez SonarQube Scanner avec l'emplacement récupéré
                     withSonarQubeEnv('Sonar 1') {
-                        sh "/opt/sonarqube"
+                        sh "${scannerHome}/opt/sonarqube"
                     }
                 }
             }
