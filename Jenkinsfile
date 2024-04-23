@@ -16,9 +16,9 @@ pipeline {
             steps {
                 script {
                     // Exécute SonarQube Scanner avec les paramètres nécessaires
-                    def scannerHome = tool 'SonarQube Scanner';
+                    //def scannerHome = tool 'SonarQube Scanner';
                     withSonarQubeEnv('Sonar 1') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh "/opt/sonarqube"
                     }
                 }
             }
