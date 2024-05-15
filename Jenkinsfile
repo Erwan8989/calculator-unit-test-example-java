@@ -22,7 +22,7 @@ pipeline {
                 script {
                     def scannerHome = tool 'Sonar 1'
                     withSonarQubeEnv('Sonar 1') {
-                        sh "${scannerHome}/bin/sonar-scanner"
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.login=sqa_801b0b467b976971ad38a440a26f933b4b1882c9"
                     }
                 }
             }
