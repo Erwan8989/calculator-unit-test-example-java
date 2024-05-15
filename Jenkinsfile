@@ -4,10 +4,14 @@ pipeline {
     tools {
         maven 'Maven' // Utilise la version par défaut de Maven
         jdk 'JDK' // Utilise la version par défaut de JDK
-        // Ajoutez ici la configuration de SonarQube Scanner si nécessaire
     }
 
     stages {
+        stage('Compile') {
+            steps {
+                sh 'mvn compile'
+            }
+        }
         stage('Test') {
             steps {
                 sh 'mvn test'
@@ -16,14 +20,22 @@ pipeline {
         stage('SonarQube analysis') {
             steps {
                 script {
-                    // Récupérez l'emplacement de SonarQube Scanner
                     def scannerHome = tool 'Sonar 1'
-                    // Exécutez SonarQube Scanner avec l'emplacement récupéré
                     withSonarQubeEnv('Sonar 1') {
-                        sh "${scannerHome}/opt/sonarqube"
+                        sh "${scannerHome}/bin/sonar-scanner"
                     }
                 }
             }
+        }
+        stage('Archive Artifacts') {
+            steps {
+                archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            }
+        }
+    }
+    post {
+        always {
+            cleanWs()
         }
     }
 }
